@@ -1,0 +1,43 @@
+# -*- coding: utf-8 -*-
+from sympy import *
+from math import *
+
+x = symbols('x')
+print("El volumen maximo de una caja recortada de las esquinas")
+print("Se agregara el -2x de cada lado\n")
+a=int(input("Teclea el valor de L1 \n"))
+b=int(input("Teclea el valor de L2 \n"))
+uni="cm"#str(input("Que unidades estan los valores"))
+
+while True:
+    if (a<0)or(b<0):
+        print("Tecleaste numeros negativos las medidas de la caja no pueden ser negativas")
+        break
+    bi = (a-2*x)*(b-2*x)*(x)
+
+    res=expand(bi)
+
+    print("Esta es la ecuacion ",res," que da el volumen maximo\n")
+
+    deri1= diff(res)
+    deri2= diff(deri1)
+    cero1=solve(deri1)[0]
+    cero2=solve(deri1)[1]
+    r=round(float(cero1),2)
+    r1=round(float(cero2),2)
+    print(f"resultado de la primera derivada {deri1} ")
+    print("Valores criticos de la ecu de la primera derivada")
+    print("x1 =",round(r,2))
+    print("x2 =",round(r1,2),"\n")
+    print(f"resultado de la segunda derivada {deri2} \n")
+    
+    expr1=deri2.subs(x,r) 
+    expr2=deri2.subs(x,r1) 
+    print("expr1",expr1,"expr2",expr2)
+   
+    if expr1 <0:
+    
+        total=res.subs(x,r)
+        print("EL volumen maximo de la caja es",round(total,2),uni,"al cubo")
+        break
+    
